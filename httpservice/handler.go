@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/gorilla/mux"
+	"log"
 	"net/http"
 	"strconv"
 )
@@ -16,7 +17,22 @@ type answer struct {
 }
 
 func SayHello(w http.ResponseWriter, r *http.Request) {
+	log.Println("Hello!")
 	fmt.Fprintf(w, "Hello!")
+}
+
+func GetLast(w http.ResponseWriter, r *http.Request) {
+	log.Println("Hello!")
+	last, err := sql.GetLastElement()
+	if err != nil {
+		log.Println(err)
+		return
+	}
+	fmt.Fprintf(w, last)
+}
+
+func GetAlpha(w http.ResponseWriter, r *http.Request) {
+	http.ServeFile(w, r, "httpservice/templates/Index.html")
 }
 
 func SayLogin(w http.ResponseWriter, r *http.Request) {

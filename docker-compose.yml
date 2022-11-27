@@ -1,6 +1,15 @@
 version: '3.8'
 services:
+  web:
+    build: .
+
+    ports:
+      - "8080:8080"
+
+    volumes:
+      - .:/code
   db:
+    container_name: dockerdev-db
     image: postgres:14.1-alpine
     restart: always
     environment:
